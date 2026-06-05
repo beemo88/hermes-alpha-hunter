@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for hermes-alpha-hunter on 2026-06-05T17:51:36Z
+# fly.toml app configuration file generated for hermes-alpha-hunter-hg9g9q on 2026-06-05T19:17:02Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'hermes-alpha-hunter'
-primary_region = 'sjc'
+app = 'hermes-alpha-hunter-hg9g9q'
+primary_region = 'ams'
 
 [build]
   dockerfile = 'Dockerfile'
