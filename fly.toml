@@ -1,0 +1,26 @@
+# fly.toml — Hunter Agent deployment config
+# Deploy: flyctl deploy --remote-only
+# Secrets needed: flyctl secrets set OPENROUTER_API_KEY=xxx LLM_MODEL=xxx
+
+app = "hermes-alpha-hunter"
+primary_region = "sjc"
+
+[build]
+  dockerfile = "Dockerfile"
+
+# The Hunter is a batch/worker process, not a web server.
+# No HTTP services needed — it runs, analyzes, and exits.
+
+[env]
+  HERMES_INFERENCE_PROVIDER = "openrouter"
+  LLM_MODEL = "nousresearch/hermes-3-llama-3.1-70b"
+
+# Machine sizing — security analysis is CPU/memory intensive
+[[vm]]
+  size = "shared-cpu-2x"
+  memory = "1gb"
+  auto_stop = "suspend"
+  auto_start = false
+
+# No services section — this is a worker, not a web app.
+# If Fly complains, we can add a dummy HTTP service later.
