@@ -1,0 +1,52 @@
+# Hunter Agent Configuration
+# Used by the Overseer to deploy and configure the Hunter
+
+agent:
+  name: "Hermes Hunter"
+  model: "nousresearch/hermes-3-llama-3.1-70b"  # Override as needed
+  max_iterations: 100
+  temperature: 0.1  # Low temperature for precise analysis
+
+skills:
+  - skills/01-scope-assessment.md
+  - skills/02-security-code-review.md
+  - skills/03-owasp-detection-patterns.md
+  - skills/04-auth-bypass-idor.md
+  - skills/05-injection-patterns.md
+  - skills/06-vulnerability-report-template.md
+
+workflow:
+  phases:
+    - scope-assessment
+    - reconnaissance
+    - analysis
+    - verification
+    - reporting
+
+  time_allocation:
+    auth_access_control: 0.30
+    injection: 0.25
+    data_flow: 0.20
+    config_secrets: 0.15
+    framework_specific: 0.10
+
+  quality_gates:
+    min_confidence: 0.8  # Don't report findings below this confidence
+    require_code_path: true  # Must have source->sink trace
+    require_impact: true  # Must describe real-world impact
+    require_fix: true  # Must suggest remediation
+
+targets:
+  # Populated by the Overseer with specific targets
+  # Format:
+  # - name: "target-name"
+  #   repo: "https://github.com/org/repo"
+  #   program: "HackerOne/program-name"
+  #   stack: "python/django"
+  #   bounty_range: "$500-$5000"
+  active: []
+
+output:
+  reports_dir: "reports/"
+  targets_dir: "targets/"
+  format: "markdown"

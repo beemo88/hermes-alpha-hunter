@@ -1,0 +1,28 @@
+# Reports contain sensitive vulnerability details
+reports/*.md
+reports/*.json
+!reports/.gitkeep
+
+# Target assessments may contain private program details
+targets/*.md
+targets/*.json
+!targets/.gitkeep
+
+# Environment and secrets
+.env
+.env.*
+*.key
+*.pem
+
+# OS / editor
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
